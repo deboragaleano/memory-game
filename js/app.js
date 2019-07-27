@@ -1,7 +1,31 @@
+
+/*
+ *      DO THIS LATER
+ */
+
+
 /*
  * Create a list that holds all of your cards
  */
 
+//  var listCards = [
+//      'fa-diamond', 
+//      'fa-diamond',  
+//      'fa-paper-plane-o',
+//      'fa-paper-plane-o', 
+//      'fa-anchor',
+//      'fa-anchor',
+//      'fa-bolt',
+//      'fa-bolt',
+//      'fa-cube',
+//      'fa-cube',
+//      'fa-leaf',
+//      'fa-leaf',
+//      'fa-bomb',
+//      'fa-bomb', 
+//      'fa-bicycle',
+//      'fa-bicycle' 
+//  ]
 
 /*
  * Display the cards on the page
@@ -25,6 +49,27 @@ function shuffle(array) {
     return array;
 }
 
+/*
+ *      DO THIS LATER
+ */
+// How you would iterate (i.e., loop) over this data structure?
+// Think about how you can create, say, an unordered list (i.e., bulleted list) in HTML from this structure
+
+// var cardElements = document.querySelectorAll(".deck i"); 
+
+// for (let i; i < listCards.length; i++) {
+//     listCards[i].
+//     shuffle(listCards[i]); 
+// }
+
+
+// Are your cards randomly placed onto the grid? Note that the provided shuffle() function (from the starter code) takes in an array parameter, and returns a shuffled version of that array
+// Figure out the HTML needed to represent a card. Remember, you have to represent two sides of the card, and the symbols are faced down
+// How can you use CSS properties like transform or opacity to represent the sides of a card?
+
+/********************/
+
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -36,3 +81,29 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+
+var allCards = document.querySelectorAll(".card"); 
+
+// FLIPPING CARDS / DISPLAYING CARDS 
+// function displayCards() {
+    for (var i = 0; i < allCards.length; i++) {
+        allCards[i].addEventListener('click', function() {
+            this.classList.add('open', 'show'); 
+        }); 
+    }; 
+// }; 
+
+
+// STORES OPENED CARDS 
+
+var openList = []; 
+
+// function OpenCards() {
+    for (var i = 0; i < allCards.length; i++) {
+        if (allCards[i].classList.contains("show")) {
+            openList.push(allCards[i]); 
+        }
+    }; 
+// }
+
