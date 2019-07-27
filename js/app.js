@@ -84,26 +84,41 @@ function shuffle(array) {
 
 
 var allCards = document.querySelectorAll(".card"); 
-
-// FLIPPING CARDS / DISPLAYING CARDS 
-// function displayCards() {
-    for (var i = 0; i < allCards.length; i++) {
-        allCards[i].addEventListener('click', function() {
-            this.classList.add('open', 'show'); 
-        }); 
-    }; 
-// }; 
+var openCards = []; 
 
 
-// STORES OPENED CARDS 
+// ADD 2 CLICKS AND HIDE CARDS 
+allCards.forEach(function(card) {
+    card.addEventListener('click', function() {
+        openCards.push(card); 
+        card.classList.add('open', 'show');
 
-var openList = []; 
-
-// function OpenCards() {
-    for (var i = 0; i < allCards.length; i++) {
-        if (allCards[i].classList.contains("show")) {
-            openList.push(allCards[i]); 
+        if(openCards.length < 2) {
+            setTimeout(function() {
+                openCards.forEach(function(card) {
+                    card.classList.remove('open', 'show');
+                });
+                openCards = []; 
+            }, 1000); 
         }
-    }; 
-// }
+    });
+});
 
+
+
+
+
+
+
+
+        // if(openCards.length < 2) {
+            //     openCards.push(allCards[i]); 
+            //     this.classList.add('open', 'show');  
+            // }
+            // else {
+            //     setTimeout(function() {
+            //         openCards.forEach(function(card) {
+            //             card.classList.remove('open', 'show')
+            //         })
+            //     }, 1000); 
+            // }
