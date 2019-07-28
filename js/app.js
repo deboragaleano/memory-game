@@ -7,24 +7,9 @@
 /*
  * Create a list that holds all of your cards
  */
+ /// MIS NOTAS: COPY ALL THE <LI>S from the html doc AND CREATE INSIDE <UL>, WITH INNERHTML, to add, then add suffle(array) and it will suffle everytime, add it to the document.body 
 
 //  var listCards = [
-//      'fa-diamond', 
-//      'fa-diamond',  
-//      'fa-paper-plane-o',
-//      'fa-paper-plane-o', 
-//      'fa-anchor',
-//      'fa-anchor',
-//      'fa-bolt',
-//      'fa-bolt',
-//      'fa-cube',
-//      'fa-cube',
-//      'fa-leaf',
-//      'fa-leaf',
-//      'fa-bomb',
-//      'fa-bomb', 
-//      'fa-bicycle',
-//      'fa-bicycle' 
 //  ]
 
 /*
@@ -62,7 +47,6 @@ function shuffle(array) {
 //     shuffle(listCards[i]); 
 // }
 
-
 // Are your cards randomly placed onto the grid? Note that the provided shuffle() function (from the starter code) takes in an array parameter, and returns a shuffled version of that array
 // Figure out the HTML needed to represent a card. Remember, you have to represent two sides of the card, and the symbols are faced down
 // How can you use CSS properties like transform or opacity to represent the sides of a card?
@@ -86,39 +70,31 @@ function shuffle(array) {
 var allCards = document.querySelectorAll(".card"); 
 var openCards = []; 
 
-
-// ADD 2 CLICKS AND HIDE CARDS 
-allCards.forEach(function(card) {
+//DISPLAY CARDS FUNCTION 
+function displayCards(card) {
     card.addEventListener('click', function() {
-        openCards.push(card); 
         card.classList.add('open', 'show');
+        addOpenCards(card); 
+    }) 
+}
 
-        if(openCards.length < 2) {
-            setTimeout(function() {
-                openCards.forEach(function(card) {
-                    card.classList.remove('open', 'show');
-                });
-                openCards = []; 
-            }, 1000); 
-        }
+allCards.forEach(function(card) {
+    displayCards(card); 
+})
+
+// ADD OPEN CARD FUNCTION 
+function addOpenCards(card) {
+    openCards.push(card); 
+}
+
+// HIDE CARDS FUNCTION WITH TIMEOUT 
+function hideCards(card) {
+    setTimeout(function() {
+        openCards.forEach(function(card) {
+        card.classList.remove('open', 'show');
     });
-});
+    openCards = []; 
+    }, 1000); 
+}
 
 
-
-
-
-
-
-
-        // if(openCards.length < 2) {
-            //     openCards.push(allCards[i]); 
-            //     this.classList.add('open', 'show');  
-            // }
-            // else {
-            //     setTimeout(function() {
-            //         openCards.forEach(function(card) {
-            //             card.classList.remove('open', 'show')
-            //         })
-            //     }, 1000); 
-            // }
