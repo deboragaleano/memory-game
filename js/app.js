@@ -1,23 +1,38 @@
 
-/*
- *      DO THIS LATER
- */
-
-
-/*
- * Create a list that holds all of your cards
- */
- /// MIS NOTAS: COPY ALL THE <LI>S from the html doc AND CREATE INSIDE <UL>, WITH INNERHTML, to add, then add suffle(array) and it will suffle everytime, add it to the document.body 
-
-//  var listCards = [
-//  ]
-
+// SHUFFLE CARDS 
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
+ var listCards = ['fa-diamond', 'fa-diamond',  
+                  'fa-paper-plane-o', 'fa-paper-plane-o', 
+                  'fa-anchor', 'fa-anchor', 
+                  'fa-bolt','fa-bolt',
+                  'fa-cube', 'fa-cube',
+                  'fa-leaf', 'fa-leaf',
+                  'fa-bomb', 'fa-bomb', 
+                  'fa-bicycle', 'fa-bicycle']
+
+var parentList = document.querySelector(".deck"); 
+
+function generateCard(card) {
+    return `<li class="card"> <i class="fa ${card}"></i></li>`  
+}
+
+var newCards = [] 
+
+listCards.forEach(function(card) {
+    newCards.push(generateCard(card));  
+    shuffle(newCards); 
+})
+
+// add array to HTML document 
+parentList.innerHTML = newCards; 
+
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -37,19 +52,6 @@ function shuffle(array) {
 /*
  *      DO THIS LATER
  */
-// How you would iterate (i.e., loop) over this data structure?
-// Think about how you can create, say, an unordered list (i.e., bulleted list) in HTML from this structure
-
-// var cardElements = document.querySelectorAll(".deck i"); 
-
-// for (let i; i < listCards.length; i++) {
-//     listCards[i].
-//     shuffle(listCards[i]); 
-// }
-
-// Are your cards randomly placed onto the grid? Note that the provided shuffle() function (from the starter code) takes in an array parameter, and returns a shuffled version of that array
-// Figure out the HTML needed to represent a card. Remember, you have to represent two sides of the card, and the symbols are faced down
-// How can you use CSS properties like transform or opacity to represent the sides of a card?
 
 /********************/
 
@@ -87,14 +89,37 @@ function addOpenCards(card) {
     openCards.push(card); 
 }
 
-// HIDE CARDS FUNCTION WITH TIMEOUT 
+
+//check if cards match 
+//loop over them to see if the cards match, 
+
+// if the list already has another card,
+// check to see if the two cards match
+//if they do, then lock the cards in the open position (put this functionality in another function that you call from this one)
+
+
+//REVIEW THIS CODE 
+// openCards.forEach(function(card, index, arr) {
+//     if (arr[index].firstElementChild === arr[index].firstElementChild) {
+//         arr[index].classList.add('match');
+//     } else {
+//         hideCards(card);  
+//     }
+// })
+
+function checkMatch() {
+    for(var i= 0; i < openCards.length; i++) {
+        if (openCards[i].firstElementChild === openCards[i].firstElementChild) {
+            openCards[i].classList.add('match'); 
+        }
+        // else {
+        //     displayCards(); 
+        }
+    }
+
+// HIDE CARDS FUNCTION WITH TIMEOUT / if they don't match 
 function hideCards(card) {
-    setTimeout(function() {
-        openCards.forEach(function(card) {
+    openCards.forEach(function(card) {
         card.classList.remove('open', 'show');
     });
-    openCards = []; 
-    }, 1000); 
 }
-
-
