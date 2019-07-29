@@ -1,13 +1,7 @@
 
-// SHUFFLE CARDS 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+// SHUFFLE CARDS AND ADD TO HTML 
 
- var listCards = ['fa-diamond', 'fa-diamond',  
+ var listCards = ['fa-diamond','fa-diamond',  
                   'fa-paper-plane-o', 'fa-paper-plane-o', 
                   'fa-anchor', 'fa-anchor', 
                   'fa-bolt','fa-bolt',
@@ -16,23 +10,21 @@
                   'fa-bomb', 'fa-bomb', 
                   'fa-bicycle', 'fa-bicycle']
 
-var parentList = document.querySelector(".deck"); 
-
-function generateCard(card) {
-    return `<li class="card"> <i class="fa ${card}"></i></li>`  
+function createCard(card) {
+    return `<li class="card"> <i class="fa ${card}"></i></li>`  //literal template ES6 to build strings 
 }
 
-var newCards = [] 
+function initGame() {
+    var newCards = [] 
+    var deckCards = document.querySelector(".deck"); 
+    listCards.forEach(function(card) {
+        newCards.push(createCard(card));  
+        return shuffle(newCards); 
+    }); 
+    deckCards.innerHTML = newCards.join(''); //separator of "no commas" (which is default)
+} 
 
-listCards.forEach(function(card) {
-    newCards.push(generateCard(card));  
-    shuffle(newCards); 
-})
-
-// add array to HTML document 
-parentList.innerHTML = newCards; 
-
-
+initGame(); 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -50,7 +42,7 @@ function shuffle(array) {
 }
 
 /*
- *      DO THIS LATER
+ *      TO DO NEXT 
  */
 
 /********************/
