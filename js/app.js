@@ -1,7 +1,7 @@
 
 // SHUFFLE CARDS AND ADD TO HTML 
 
- var listCards = ['fa-diamond','fa-diamond',  
+const listCards = ['fa-diamond','fa-diamond',  
                   'fa-paper-plane-o', 'fa-paper-plane-o', 
                   'fa-anchor', 'fa-anchor', 
                   'fa-bolt','fa-bolt',
@@ -10,21 +10,22 @@
                   'fa-bomb', 'fa-bomb', 
                   'fa-bicycle', 'fa-bicycle']
 
-function createCard(card) {
-    return `<li class="card"> <i class="fa ${card}"></i></li>`  //literal template ES6 to build strings 
-}
+const shuffledListCards = shuffle(listCards); 
 
-function initGame() {
-    var newCards = [] 
-    var deckCards = document.querySelector(".deck"); 
-    listCards.forEach(function(card) {
-        newCards.push(createCard(card));  
-        return shuffle(newCards); 
+createDeck(); 
+
+function createDeck() {
+    const fragment = document.createDocumentFragment(); //Empty fragment to store or append elements  
+
+    shuffledListCards.forEach(function(card) {
+        const newCard = document.createElement("li"); 
+        newCard.className = "card"; 
+        newCard.innerHTML = `<i class="fa ${card}"></i>` 
+        fragment.appendChild(newCard); 
     }); 
-    deckCards.innerHTML = newCards.join(''); //separator of "no commas" (which is default)
-} 
-
-initGame(); 
+    const deckCards = document.querySelector('.deck'); 
+    deckCards.appendChild(fragment); 
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
