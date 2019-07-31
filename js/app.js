@@ -10,13 +10,12 @@ const listCards = ['fa-diamond','fa-diamond',
                   'fa-bomb', 'fa-bomb', 
                   'fa-bicycle', 'fa-bicycle']
 
-const shuffledListCards = shuffle(listCards); 
-
 createDeck(); 
 
 function createDeck() {
-    const fragment = document.createDocumentFragment(); //Empty fragment to store or append elements  
+    const shuffledListCards = shuffle(listCards); 
 
+    const fragment = document.createDocumentFragment(); //Empty fragment to append elements  
     shuffledListCards.forEach(function(card) {
         const newCard = document.createElement("li"); 
         newCard.className = "card"; 
@@ -42,12 +41,57 @@ function shuffle(array) {
     return array;
 }
 
-/*
- *      TO DO NEXT 
- */
 
-/********************/
+/************************************************************************/
 
+const allCards = document.querySelectorAll(".card"); 
+let openCards = []; 
+
+activateCards(); 
+
+function activateCards() {
+    allCards.forEach(function(card) {
+        card.addEventListener('click', function() {
+            card.classList.add('open', 'show'); 
+            openCards.push(card); 
+            if (openCards.length === 2) {
+            compareCards();
+            }
+        })
+    })
+}
+
+function desactiveCards() {
+    openCards.forEach(function(card) {
+        card.classList.remove('open', 'show');
+        openCards = []; 
+    })
+}
+
+function compareCards() {
+    if(openCards[0].innerHTML === openCards[1].innerHTML) {
+        setTimeout(cardsMatch, 300);
+    } else {
+        setTimeout(cardsDontMatch, 800);
+    }
+}
+
+function cardsMatch() {
+    openCards[0].classList.add('match');
+    openCards[1].classList.add('match'); 
+    desactiveCards();  
+}
+
+function cardsDontMatch() {
+    desactiveCards();
+}
+
+// // for game over / create a function 
+// var matchedCards = []; // create a list of cards where I would store the cards that match, every 2 cards, then it will go there 
+
+// if(matchedCards.length === 16) {
+//     //write logic for game is won 
+// }
 
 
 /*
@@ -60,59 +104,3 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-
-
-var allCards = document.querySelectorAll(".card"); 
-var openCards = []; 
-
-//DISPLAY CARDS FUNCTION 
-function displayCards(card) {
-    card.addEventListener('click', function() {
-        card.classList.add('open', 'show');
-        addOpenCards(card); 
-    }) 
-}
-
-allCards.forEach(function(card) {
-    displayCards(card); 
-})
-
-// ADD OPEN CARD FUNCTION 
-function addOpenCards(card) {
-    openCards.push(card); 
-}
-
-
-//check if cards match 
-//loop over them to see if the cards match, 
-
-// if the list already has another card,
-// check to see if the two cards match
-//if they do, then lock the cards in the open position (put this functionality in another function that you call from this one)
-
-
-//REVIEW THIS CODE 
-// openCards.forEach(function(card, index, arr) {
-//     if (arr[index].firstElementChild === arr[index].firstElementChild) {
-//         arr[index].classList.add('match');
-//     } else {
-//         hideCards(card);  
-//     }
-// })
-
-function checkMatch() {
-    for(var i= 0; i < openCards.length; i++) {
-        if (openCards[i].firstElementChild === openCards[i].firstElementChild) {
-            openCards[i].classList.add('match'); 
-        }
-        // else {
-        //     displayCards(); 
-        }
-    }
-
-// HIDE CARDS FUNCTION WITH TIMEOUT / if they don't match 
-function hideCards(card) {
-    openCards.forEach(function(card) {
-        card.classList.remove('open', 'show');
-    });
-}
