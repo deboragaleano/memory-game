@@ -48,12 +48,16 @@ const allCards = document.querySelectorAll(".card");
 let openCards = []; 
 let matchedCards = []; 
 let moves = 0; 
+let time; 
 
 activateCards(); 
 
 function activateCards() {
     allCards.forEach(function(card) {
         card.addEventListener('click', function() {
+            if (!time) {
+                time = setInterval(setTime, 1000);
+            }
             card.classList.add('open', 'show'); 
             openCards.push(card); 
             if (openCards.length === 2) {
@@ -94,6 +98,7 @@ function cardsDontMatch() {
 function gameOver() {
     if(matchedCards.length === 16) {
         console.log('YOU WON!'); 
+        clearInterval(time); 
     }
 }
 
@@ -122,6 +127,26 @@ function starRating() {
     });
 }
 
+//TIMER 
+
+const minutes = document.querySelector(".min");
+const seconds = document.querySelector(".secs");
+let totalSeconds = 0;
+
+function setTime() {
+  ++totalSeconds;
+  seconds.innerHTML = pad(totalSeconds % 60);
+  minutes.innerHTML = pad(parseInt(totalSeconds / 60));
+}
+
+function pad(val) {
+  const valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
+}
 
 /************************************************************************/
 
@@ -133,12 +158,7 @@ TO DO NEXT:
  
 
 MODAL:
-
 Congratulations Popup. When a user wins the game, a modal appears to congratulate the player and ask if they want to play again. It should also tell the user how much time it took to win the game, and what the star rating was.
-
-TIMER:
-This timer should start when the player starts a game, and end when the player wins the game
-Hint: How can setTimeout() come into play here?
 
 
 RESET BUTTON:
