@@ -41,21 +41,22 @@ function shuffle(array) {
     return array;
 }
 
-
 /************************************************************************/
 
 const allCards = document.querySelectorAll(".card"); 
 let openCards = []; 
 let matchedCards = []; 
 let moves = 0; 
-let time; 
+let time; // var declared but not defined yet - make it available in the global scope for clearInterval()
+const movesNumber = document.querySelector('.moves');  
+const allStars = document.querySelectorAll('ul.stars i');   
 
 activateCards(); 
 
 function activateCards() {
     allCards.forEach(function(card) {
         card.addEventListener('click', function() {
-            if (!time) {
+            if (!time) { // if time is NOT "defined" then define it and run
                 time = setInterval(setTime, 1000);
             }
             card.classList.add('open', 'show'); 
@@ -97,37 +98,38 @@ function cardsDontMatch() {
 
 function gameOver() {
     if(matchedCards.length === 16) {
-        console.log('YOU WON!'); 
-        clearInterval(time); 
+        clearInterval(time); //stop time
     }
 }
 
+/* MOVES COUNTER */
+
 function movesCounter() {
     moves++; 
-    const movesNumber = document.querySelector('.moves'); 
     movesNumber.innerHTML = moves; 
     starRating()
 }
 
+/* STARS FUNCTION */
+
 function starRating() {     
-    const allStars = document.querySelectorAll('ul.stars i');  
     allStars.forEach(function(star, i, arr){ 
-        if(moves === 10) {
+        if(moves === 13) {
             arr[2].classList.remove('fa'); 
             arr[2].classList.add('far');
         }
-        if(moves === 15) {
+        if(moves === 18) {
             arr[1].classList.remove('fa'); 
             arr[1].classList.add('far');
         }
-        if(moves === 20) {
+        if(moves === 22) {
             arr[0].classList.remove('fa'); 
             arr[0].classList.add('far');
         }
     });
 }
 
-//TIMER 
+/* TIMER FUNCTION */
 
 const minutes = document.querySelector(".min");
 const seconds = document.querySelector(".secs");
@@ -148,22 +150,44 @@ function pad(val) {
   }
 }
 
-/************************************************************************/
 
+/* RESET FUNCTION */
+
+function reset() {
+    // reset time - /* FIX THIS!! */
+    seconds.innerHTML = '00'; 
+    minutes.innerHTML = '00'; 
+    clearInterval(time);  
+    
+    // restart the grid 
+    const deck = document.querySelector('.deck');
+    const cards = shuffle(Array.from(document.querySelectorAll('.deck li'))); //array.from 
+    deck.innerHTML = '';
+    cards.forEach(function(card) {
+        deck.appendChild(card);
+        card.classList.remove('open', 'match', 'show');  
+    }) 
+
+    // stars reset 
+    allStars.forEach(function(star, i, arr) {
+        arr[i].classList.remove('far');
+        arr[i].classList.add('fa'); 
+    })
+    // reset moves 
+    moves = 0; 
+    movesNumber.innerHTML = moves; 
+}
+
+
+
+/************************************************************************/
 
 /*
 TO DO NEXT:  
 
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- 
-
 MODAL:
+
 Congratulations Popup. When a user wins the game, a modal appears to congratulate the player and ask if they want to play again. It should also tell the user how much time it took to win the game, and what the star rating was.
-
-
-RESET BUTTON:
-This should allow the player to reset the entire grid as well as all the above
-A restart button allows the player to reset the game board, the timer, and the star rating.
 
  */
 
