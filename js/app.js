@@ -99,6 +99,7 @@ function cardsDontMatch() {
 function gameOver() {
     if(matchedCards.length === 16) {
         clearInterval(time); //stop time
+        showModal()
     }
 }
 
@@ -150,7 +151,6 @@ function pad(val) {
   }
 }
 
-
 /* RESET FUNCTION */
 
 function reset() {
@@ -160,12 +160,12 @@ function reset() {
     clearInterval(time);  
     
     // restart the grid 
-    const deck = document.querySelector('.deck');
-    const cards = shuffle(Array.from(document.querySelectorAll('.deck li'))); //array.from 
-    deck.innerHTML = '';
-    cards.forEach(function(card) {
-        deck.appendChild(card);
-        card.classList.remove('open', 'match', 'show');  
+    const deck = document.querySelector('.deck'); // select the deck
+    const cards = shuffle(Array.from(document.querySelectorAll('.deck li'))); //array.from will convert a Nodelist (or anything) into an array
+    deck.innerHTML = ''; // empty the current grid
+    cards.forEach(function(card) { 
+        deck.appendChild(card); // add the suffled card to the deck again 
+        card.classList.remove('open', 'match', 'show');  // remove classes
     }) 
 
     // stars reset 
@@ -178,16 +178,40 @@ function reset() {
     movesNumber.innerHTML = moves; 
 }
 
+/* MODAL FUNCTION*/
+
+const modal = document.querySelector(".bg-modal"); 
+
+function showModal() {
+    modal.style.display = 'flex'; 
+    let numberOfMoves = movesNumber.textContent; 
+    // ADD NUMBER OF STARS
+    // ADD MIN AND SECS 
+    const modalText = document.querySelector('.modal-text'); 
+    const modalScore = `<p class='score'>In ${moves} mins, ${moves} secs, and with ${numberOfMoves} moves and ${moves} stars!</p>`
+    modalText.insertAdjacentHTML('afterend', modalScore);
+}
+
+closeModal()
+
+function closeModal() {
+    modal.addEventListener('click', function() {
+        this.style.display = "none"; 
+    })
+}
 
 
 /************************************************************************/
 
+ 
 /*
-TO DO NEXT:  
+TODO:
 
-MODAL:
+1) Fix STAR and TIME and in the showModal() function
+2) Fix TIMER function itself - look at comments from Antonio/Udacity
+3) FIX Reset Button
+4) Add CSS styling for correct vs incorrect
+5) Organize code in functions? 
 
-Congratulations Popup. When a user wins the game, a modal appears to congratulate the player and ask if they want to play again. It should also tell the user how much time it took to win the game, and what the star rating was.
-
- */
+//  */
 

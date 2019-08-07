@@ -116,3 +116,53 @@ h1 {
 .score-panel .min {
     padding-left: 25px; 
 }
+
+.bg-modal {
+    width: 100%; 
+    height: 850px;
+    background-color: rgba(0, 0, 0, 0.7); 
+    position: absolute; /* when you say abs then you can say WHERE exactly which is top, see below */
+    top: 0; 
+    justify-content: center; 
+    align-items: center; 
+    display: none; 
+}
+
+.modal-content {
+    width: 500px; 
+    height: 300px;
+    background-color: white; 
+    border-radius: 10px; 
+    text-align: center; 
+    padding: 27px 20px 25px;
+    margin-bottom: 50px; 
+}
+
+.modal-text {
+    font-family: 'Lora', serif;
+    font-size: 27px;
+    font-weight: 600; 
+    color: #7f7f7f;
+}
+
+.score {
+    font-family: 'Lora', serif;
+    color: #646363;
+}
+
+.button {
+    background-color: #10a6b1;
+    border-radius: 10px;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    margin: 4px 2px;
+    cursor: pointer;
+}  
+
+.fa-check-circle {
+    font-size: 40px; 
+    color: #10a6b1; 
+}
