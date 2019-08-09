@@ -1,4 +1,7 @@
-# Memory Game Project
+# Memory Game 
+
+This is a classic memory game. The player can click on two cards to see if they match. Game functionality include: star-rating, timer, a moves counter and a reset button. 
+Have fun! 
 
 ## Table of Contents
 
@@ -7,14 +10,12 @@
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+* Click on two cards to see if they match 
+* Win the game after all 16 cards are matched 
+* A pop up will provide the time, rating and the number of moves that it took to complete the game 
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+This repository included a starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).

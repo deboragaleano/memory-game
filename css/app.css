@@ -89,8 +89,6 @@ h1 {
     to { transform: scale(1); }
 }
   
-/* TODO: add unmatch animation  */
-
 .deck .card.unmatch {
     animation-name: shake; 
     animation-duration: .4s; 
@@ -106,7 +104,6 @@ h1 {
     20% { transform: skewX(0deg); }
     100% { transform: skewX(0deg); }  
 }
-  
   
 
 /*
