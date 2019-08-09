@@ -3,6 +3,8 @@
 This is a classic memory game. The player can click on two cards to see if they match. Game functionality include: star-rating, timer, a moves-counter and a reset button. 
 Have fun! 
 
+Click [here](http://htmlpreview.github.io/?https://github.com/deboragaleano/memory-game/blob/master/index.html) to start playing: 
+
 ## Table of Contents
 
 * [Instructions](#instructions)
