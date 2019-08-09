@@ -49,7 +49,6 @@ let matchedCards = [];
 let moves = 0; 
 let time; // var declared but not defined yet - make it available in the global scope for clearInterval()
 const movesNumber = document.querySelector('.moves');  
-const allStars = document.querySelectorAll('ul.stars i');   
 
 activateCards(); 
 
@@ -113,21 +112,25 @@ function movesCounter() {
 
 /* STARS FUNCTION */
 
-function starRating() {     
-    allStars.forEach(function(star, i, arr){ 
-        if(moves === 13) {
-            arr[2].classList.remove('fa'); 
-            arr[2].classList.add('far');
-        }
-        if(moves === 18) {
-            arr[1].classList.remove('fa'); 
-            arr[1].classList.add('far');
-        }
-        if(moves === 22) {
-            arr[0].classList.remove('fa'); 
-            arr[0].classList.add('far');
-        }
-    });
+let starsCounter = 3;
+
+function starRating() {
+  const newStar = '<i class="far fa-star"></i>';
+
+  if (moves === 13) {
+    document.querySelector('.first').innerHTML = newStar;
+    starsCounter = 2;
+  };
+
+  if (moves === 18) {
+    document.querySelector('.second').innerHTML = newStar;
+    starsCounter = 1;
+  };
+
+  if (moves >= 25) {
+    document.querySelector('.third').innerHTML = newStar;
+    starsCounter = 0;
+  };
 }
 
 /* TIMER FUNCTION */
@@ -151,6 +154,27 @@ function pad(val) {
   }
 }
 
+/* MODAL FUNCTION*/
+
+const modal = document.querySelector(".bg-modal"); 
+
+function showModal() {
+    modal.style.display = 'flex'; 
+    let numberOfMoves = movesNumber.textContent; 
+    // ADD MIN AND SECS 
+    const modalText = document.querySelector('.modal-text'); 
+    const modalScore = `<p class='score'>In ${moves} mins, ${moves} secs, and with ${numberOfMoves} moves and ${starsCounter} stars!</p>`
+    modalText.insertAdjacentHTML('afterend', modalScore);
+}
+
+closeModal()
+
+function closeModal() {
+    modal.addEventListener('click', function() {
+        this.style.display = "none"; 
+    })
+}
+
 /* RESET FUNCTION */
 
 function reset() {
@@ -169,6 +193,7 @@ function reset() {
     }) 
 
     // stars reset 
+    const allStars = document.querySelectorAll('ul.stars i');  
     allStars.forEach(function(star, i, arr) {
         arr[i].classList.remove('far');
         arr[i].classList.add('fa'); 
@@ -178,28 +203,6 @@ function reset() {
     movesNumber.innerHTML = moves; 
 }
 
-/* MODAL FUNCTION*/
-
-const modal = document.querySelector(".bg-modal"); 
-
-function showModal() {
-    modal.style.display = 'flex'; 
-    let numberOfMoves = movesNumber.textContent; 
-    // ADD NUMBER OF STARS
-    // ADD MIN AND SECS 
-    const modalText = document.querySelector('.modal-text'); 
-    const modalScore = `<p class='score'>In ${moves} mins, ${moves} secs, and with ${numberOfMoves} moves and ${moves} stars!</p>`
-    modalText.insertAdjacentHTML('afterend', modalScore);
-}
-
-closeModal()
-
-function closeModal() {
-    modal.addEventListener('click', function() {
-        this.style.display = "none"; 
-    })
-}
-
 
 /************************************************************************/
 
@@ -207,11 +210,11 @@ function closeModal() {
 /*
 TODO:
 
-1) Fix STAR and TIME and in the showModal() function
+1) Fix TIMER in the showModal() function
 2) Fix TIMER function itself - look at comments from Antonio/Udacity
-3) FIX Reset Button
+3) FIX TIMER in Reset Button
 4) Add CSS styling for correct vs incorrect
 5) Organize code in functions? 
+6) Go through rubric and do the rest (README, etc.)
 
 //  */
-
