@@ -38,8 +38,8 @@ h1 {
  */
 
 .deck {
-    width: 600px; 
-    min-height: 600px;
+    width: 350px; 
+    min-height: 350px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
@@ -48,12 +48,12 @@ h1 {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 3em;
+    /* margin: 0 0 3em; */
 }
 
 .deck .card {
-    height: 115px;
-    width: 115px;
+    height: 60px;
+    width: 60px;
     background: #2e3d49;
     font-size: 0; /*THE ICON SIZE IS 0*/
     color: #ffffff; 
@@ -72,21 +72,21 @@ h1 {
 }
 
 .deck .card.show {
-    font-size: 33px; 
+    font-size: 25px; 
 }
 
 .deck .card.match {
     cursor: default;
     background: #02ccba;
-    font-size: 33px;
-    animation-name: pulse; 
-    animation-duration: 3s;
+    font-size: 25px;
+    animation-name: rubberBand; 
+    animation-duration: .6s;
 }
 
-@keyframes pulse {
-    from { transform: scale(1); }
-    50% { transform: scale(0.85); }
-    to { transform: scale(1); }
+@keyframes rubberBand {
+    from{transform: scale3d(1, 1, 1);}
+    50% {transform: scale3d(1.05, 1.05, 1.05);}
+    to {transform: scale3d(1, 1, 1);}
 }
   
 .deck .card.unmatch {
@@ -111,7 +111,7 @@ h1 {
  */
 
 .score-panel {
-    text-align: left;
+    text-align: center; 
     width: 345px;
     margin-bottom: 10px;
 }
@@ -129,22 +129,18 @@ h1 {
 }
 
 .score-panel .restart {
-    float: right;
-    cursor: pointer;
-}
-
-.score-panel .restart {
+    padding-right: 20px; 
     float: right;
     cursor: pointer;
 }
 
 .timer {
-    padding-left: 30px; 
+    padding-left: 20px; 
 }
 
 .bg-modal {
     width: 100%; 
-    height: 850px;
+    height: 750px;
     background-color: rgba(0, 0, 0, 0.7); 
     position: absolute; /* when you say abs then you can say WHERE exactly which is top, see below */
     top: 0; 
@@ -154,8 +150,8 @@ h1 {
 }
 
 .modal-content {
-    width: 500px; 
-    height: 300px;
+    width: 300px; 
+    height: 250px;
     background-color: white; 
     border-radius: 10px; 
     text-align: center; 
@@ -165,7 +161,7 @@ h1 {
 
 .modal-text {
     font-family: 'Lora', serif;
-    font-size: 27px;
+    font-size: 20px;
     font-weight: 600; 
     color: #7f7f7f;
 }
@@ -179,10 +175,10 @@ h1 {
     background-color: #10a6b1;
     border-radius: 10px;
     color: white;
-    padding: 15px 20px;
+    padding: 10px 15px;
     text-align: center;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 15px;
     margin: 4px 2px;
     cursor: pointer;
 }  
@@ -190,4 +186,44 @@ h1 {
 .fa-check-circle {
     font-size: 40px; 
     color: #10a6b1; 
+}
+
+@media screen and (min-width: 600px) {
+    .deck .card {
+      width: 115px;
+      height: 115px;
+    }
+
+    .deck .card.show {
+        font-size: 33px; 
+    }
+
+    .deck .card.match {
+        font-size: 33px;
+    }
+
+    .deck  {
+      width: 600px;
+      height: 600px;
+    }
+
+    .bg-modal {
+        height: 750px;
+    }
+    
+    .modal-content {
+        width: 600px; 
+        height: 350px;
+        padding: 27px 20px 25px;
+        margin-bottom: 50px; 
+    }
+    
+    .modal-text {
+        font-size: 32px;
+    }
+    
+    .button {
+        padding: 15px 20px;
+        font-size: 20px;
+    }  
 }

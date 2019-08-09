@@ -205,7 +205,7 @@ function showModal() {
     modal.style.display = 'flex'; 
     let numberOfMoves = movesNumber.textContent; 
     const modalText = document.querySelector('.modal-text'); 
-    const modalScore = `<p class='score'>In ${minute} mins, ${second} secs, and with ${numberOfMoves} moves and ${starsCounter} star(s)!</p>`
+    const modalScore = `<p class='score'>In ${minute} mins, ${second} secs. With ${numberOfMoves} moves and ${starsCounter} star(s)!</p>`
     modalText.insertAdjacentHTML('afterend', modalScore);
 }
 
