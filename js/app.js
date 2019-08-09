@@ -22,7 +22,7 @@ function createDeck() {
         newCard.innerHTML = `<i class="fa ${card}"></i>` 
         fragment.appendChild(newCard); 
     }); 
-    const deckCards = document.querySelector('.deck'); 
+    const deckCards = document.querySelector('.deck');  
     deckCards.appendChild(fragment); 
 }
 
@@ -47,17 +47,15 @@ const allCards = document.querySelectorAll(".card");
 let openCards = []; 
 let matchedCards = []; 
 let moves = 0; 
-let time; // var declared but not defined yet - make it available in the global scope for clearInterval()
 const movesNumber = document.querySelector('.moves');  
+
+/* GAME LOGIC */
 
 activateCards(); 
 
 function activateCards() {
     allCards.forEach(function(card) {
-        card.addEventListener('click', function() {
-            if (!time) { // if time is NOT "defined" then define it and run
-                time = setInterval(setTime, 1000);
-            }
+        card.addEventListener('click', function() { 
             card.classList.add('open', 'show'); 
             openCards.push(card); 
             if (openCards.length === 2) {
@@ -97,8 +95,8 @@ function cardsDontMatch() {
 
 function gameOver() {
     if(matchedCards.length === 16) {
-        clearInterval(time); //stop time
-        showModal()
+        showModal(); 
+        stopTimer(); 
     }
 }
 
@@ -108,6 +106,13 @@ function movesCounter() {
     moves++; 
     movesNumber.innerHTML = moves; 
     starRating()
+    // start timer on first move
+    if(moves == 1) {
+        second = 0;
+        minute = 0; 
+        hour = 0;
+        startTimer();
+    }
 }
 
 /* STARS FUNCTION */
@@ -135,54 +140,38 @@ function starRating() {
 
 /* TIMER FUNCTION */
 
-const minutes = document.querySelector(".min");
-const seconds = document.querySelector(".secs");
-let totalSeconds = 0;
+let second = 0;
+let minute = 0;
+const timerDisplay = document.querySelector('.timer');
+let clock; 
 
-function setTime() {
-  ++totalSeconds;
-  seconds.innerHTML = pad(totalSeconds % 60);
-  minutes.innerHTML = pad(parseInt(totalSeconds / 60));
+function startTimer(){
+    clock = setInterval(function(){
+        timerDisplay.innerHTML = minute + " mins " + second + " secs";
+        second++;
+        if(second == 60){
+            minute++;
+            second = 0;
+        }
+        if(minute == 60){
+            hour++;
+            minute = 0;
+        }
+    },1000);
 }
 
-function pad(val) {
-  const valString = val + "";
-  if (valString.length < 2) {
-    return "0" + valString;
-  } else {
-    return valString;
-  }
+function stopTimer() {
+    timerDisplay.innerHTML = "0 mins 0 secs";
+    clearInterval(clock);
 }
 
-/* MODAL FUNCTION*/
-
-const modal = document.querySelector(".bg-modal"); 
-
-function showModal() {
-    modal.style.display = 'flex'; 
-    let numberOfMoves = movesNumber.textContent; 
-    // ADD MIN AND SECS 
-    const modalText = document.querySelector('.modal-text'); 
-    const modalScore = `<p class='score'>In ${moves} mins, ${moves} secs, and with ${numberOfMoves} moves and ${starsCounter} stars!</p>`
-    modalText.insertAdjacentHTML('afterend', modalScore);
-}
-
-closeModal()
-
-function closeModal() {
-    modal.addEventListener('click', function() {
-        this.style.display = "none"; 
-    })
-}
 
 /* RESET FUNCTION */
 
 function reset() {
-    // reset time - /* FIX THIS!! */
-    seconds.innerHTML = '00'; 
-    minutes.innerHTML = '00'; 
-    clearInterval(time);  
-    
+    // restart time
+    stopTimer(); 
+
     // restart the grid 
     const deck = document.querySelector('.deck'); // select the deck
     const cards = shuffle(Array.from(document.querySelectorAll('.deck li'))); //array.from will convert a Nodelist (or anything) into an array
@@ -203,18 +192,24 @@ function reset() {
     movesNumber.innerHTML = moves; 
 }
 
+/* MODAL FUNCTION*/
+
+const modal = document.querySelector(".bg-modal"); 
+
+function showModal() {
+    modal.style.display = 'flex'; 
+    let numberOfMoves = movesNumber.textContent; 
+    const modalText = document.querySelector('.modal-text'); 
+    const modalScore = `<p class='score'>In ${minute} mins, ${second} secs, and with ${numberOfMoves} moves and ${starsCounter} star(s)!</p>`
+    modalText.insertAdjacentHTML('afterend', modalScore);
+}
+
+closeModal()
+
+function closeModal() {
+    modal.addEventListener('click', function() {
+        this.style.display = "none"; 
+    })
+}
 
 /************************************************************************/
-
- 
-/*
-TODO:
-
-1) Fix TIMER in the showModal() function
-2) Fix TIMER function itself - look at comments from Antonio/Udacity
-3) FIX TIMER in Reset Button
-4) Add CSS styling for correct vs incorrect
-5) Organize code in functions? 
-6) Go through rubric and do the rest (README, etc.)
-
-//  */
