@@ -68,7 +68,7 @@ function activateCards() {
 
 function desactiveCards() {
     openCards.forEach(function(card) {
-        card.classList.remove('open', 'show');
+        card.classList.remove('open', 'show', 'unmatch');
         openCards = []; 
     })
 }
@@ -77,7 +77,12 @@ function compareCards() {
     if(openCards[0].innerHTML === openCards[1].innerHTML) {
         setTimeout(cardsMatch, 300);
     } else {
+        setTimeout(function() {
+            openCards[0].classList.add('unmatch');
+            openCards[1].classList.add('unmatch');
+        }, 100); 
         setTimeout(cardsDontMatch, 700);
+
     }
 }
 
@@ -89,7 +94,7 @@ function cardsMatch() {
     gameOver(); 
 }
 
-function cardsDontMatch() {
+function cardsDontMatch() { 
     desactiveCards();
 }
 
@@ -107,7 +112,7 @@ function movesCounter() {
     movesNumber.innerHTML = moves; 
     starRating()
     // start timer on first move
-    if(moves == 1) {
+    if(moves === 1) {
         second = 0;
         minute = 0; 
         hour = 0;

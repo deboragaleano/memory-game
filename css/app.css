@@ -66,20 +66,48 @@ h1 {
 }
 
 .deck .card.open {
-    transform: rotateY(0); /* WHAT DOES IT DO? */
+    transform: rotateY(0); 
     background: #02b3e4;
     cursor: default;
 }
 
 .deck .card.show {
-    font-size: 33px; /* NOW THE CARD IS VISIBLE BECAUSE OF THE FONT */
+    font-size: 33px; 
 }
 
 .deck .card.match {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    animation-name: pulse; 
+    animation-duration: 3s;
 }
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    50% { transform: scale(0.85); }
+    to { transform: scale(1); }
+}
+  
+/* TODO: add unmatch animation  */
+
+.deck .card.unmatch {
+    animation-name: shake; 
+    animation-duration: .4s; 
+    font-size: 33px;
+    background: #f00619; 
+}
+
+@keyframes shake {
+    0% { transform: skewX(-15deg); }
+    5% { transform: skewX(15deg); }
+    10% { transform: skewX(-15deg); }
+    15% { transform: skewX(15deg); }
+    20% { transform: skewX(0deg); }
+    100% { transform: skewX(0deg); }  
+}
+  
+  
 
 /*
  * Styles for the Score Panel
