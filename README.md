@@ -26,7 +26,7 @@ To preview the `index.html` (using the GitHub & BitBucket HTML Preview) please c
 ## Built With
 
 * Vanilla JavaScript, HTML and CSS
-* *Dependencies*: 
+* **Dependencies**: 
     * [Font Awesome](https://fontawesome.com/): Used for symbols  
     * [Animate.css](https://daneden.github.io/animate.css/): Used for CSS Animation 
 
