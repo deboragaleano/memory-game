@@ -1,19 +1,14 @@
 
 // SHUFFLE CARDS AND ADD TO HTML 
 
-const listCards = ['fa-diamond','fa-diamond',  
-                  'fa-paper-plane-o', 'fa-paper-plane-o', 
-                  'fa-anchor', 'fa-anchor', 
-                  'fa-bolt','fa-bolt',
-                  'fa-cube', 'fa-cube',
-                  'fa-leaf', 'fa-leaf',
-                  'fa-bomb', 'fa-bomb', 
-                  'fa-bicycle', 'fa-bicycle']
+let symbols = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube',                       'fa-leaf', 'fa-bomb', 'fa-bicycle']; 
+
+let arrCards = symbols.concat(symbols);  // Using concat to duplicate values in arr 
 
 createDeck(); 
 
 function createDeck() {
-    const shuffledListCards = shuffle(listCards); 
+    const shuffledListCards = shuffle(arrCards); 
 
     const fragment = document.createDocumentFragment(); //Empty fragment to append elements  
     shuffledListCards.forEach(function(card) {
@@ -174,6 +169,8 @@ function stopTimer() {
 /* RESET FUNCTION */
 
 function reset() {
+    matchedCards = [];
+    openCards = [];
     // restart time
     stopTimer(); 
 
@@ -199,14 +196,14 @@ function reset() {
 
 /* MODAL FUNCTION*/
 
-const modal = document.querySelector(".bg-modal"); 
+let modal = document.querySelector(".bg-modal"); 
+let score = document.querySelector('.score'); 
 
 function showModal() {
     modal.style.display = 'flex'; 
     let numberOfMoves = movesNumber.textContent; 
-    const modalText = document.querySelector('.modal-text'); 
-    const modalScore = `<p class='score'>In ${minute} mins, ${second} secs. With ${numberOfMoves} moves and ${starsCounter} star(s)!</p>`
-    modalText.insertAdjacentHTML('afterend', modalScore);
+    let modalScore = `<p class='score'>In ${minute} mins, ${second} secs. With ${numberOfMoves} moves and ${starsCounter} star(s)!</p>`
+    score.innerHTML = modalScore; 
 }
 
 closeModal()
