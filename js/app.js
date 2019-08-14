@@ -51,11 +51,13 @@ activateCards();
 function activateCards() {
     allCards.forEach(function(card) {
         card.addEventListener('click', function() { 
-            card.classList.add('open', 'show'); 
-            openCards.push(card); 
-            if (openCards.length === 2) {
-            compareCards();
-            movesCounter();
+            if(!card.classList.contains('open', 'show')) { // disable clicking by checking if it has open and show already ('if it doesn't then add')
+                card.classList.add('open', 'show'); 
+                openCards.push(card); 
+                if(openCards.length === 2) {
+                compareCards();
+                movesCounter();
+                }
             }
         })
     })
@@ -63,7 +65,7 @@ function activateCards() {
 
 function desactiveCards() {
     openCards.forEach(function(card) {
-        card.classList.remove('open', 'show', 'unmatch');
+        card.classList.remove('open', 'show', 'unmatch');  
         openCards = []; 
     })
 }
@@ -77,13 +79,12 @@ function compareCards() {
             openCards[1].classList.add('unmatch');
         }, 100); 
         setTimeout(cardsDontMatch, 700);
-
     }
 }
 
 function cardsMatch() {
-    const card1 = openCards[0].classList.add('match');
-    const card2 = openCards[1].classList.add('match'); 
+    let card1 = openCards[0].classList.add('match', 'disable');
+    let card2 = openCards[1].classList.add('match', 'disable'); 
     matchedCards.push(card1, card2); 
     desactiveCards();  
     gameOver(); 
@@ -122,17 +123,17 @@ let starsCounter = 3;
 function starRating() {
   const newStar = '<i class="far fa-star"></i>';
 
-  if (moves === 13) {
+  if (moves === 15) {
     document.querySelector('.first').innerHTML = newStar;
     starsCounter = 2;
   };
 
-  if (moves === 18) {
+  if (moves === 20) {
     document.querySelector('.second').innerHTML = newStar;
     starsCounter = 1;
   };
 
-  if (moves >= 25) {
+  if (moves >= 26) {
     document.querySelector('.third').innerHTML = newStar;
     starsCounter = 0;
   };
@@ -180,7 +181,7 @@ function reset() {
     deck.innerHTML = ''; // empty the current grid
     cards.forEach(function(card) { 
         deck.appendChild(card); // add the suffled card to the deck again 
-        card.classList.remove('open', 'match', 'show');  // remove classes
+        card.classList.remove('open', 'match', 'show', 'disable');  // remove classes
     }) 
 
     // stars reset 
@@ -189,6 +190,7 @@ function reset() {
         arr[i].classList.remove('far');
         arr[i].classList.add('fa'); 
     })
+
     // reset moves 
     moves = 0; 
     movesNumber.innerHTML = moves; 

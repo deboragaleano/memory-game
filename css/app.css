@@ -96,6 +96,10 @@ h1 {
     background: #f00619; 
 }
 
+.deck .card.disable {
+    pointer-events: none; 
+}
+
 @keyframes shake {
     0% { transform: skewX(-15deg); }
     5% { transform: skewX(15deg); }
