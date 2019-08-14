@@ -1,7 +1,7 @@
 
 // SHUFFLE CARDS AND ADD TO HTML 
 
-let symbols = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube',                       'fa-leaf', 'fa-bomb', 'fa-bicycle']; 
+let symbols = ['fa-apple-alt', 'fa-hotdog', 'fa-hamburger', 'fa-candy-cane', 'fa-ice-cream', 'fa-pizza-slice', 'fa-fish', 'fa-carrot']; 
 
 let arrCards = symbols.concat(symbols);  // Using concat to duplicate values in arr 
 
@@ -14,7 +14,7 @@ function createDeck() {
     shuffledListCards.forEach(function(card) {
         const newCard = document.createElement("li"); 
         newCard.className = "card"; 
-        newCard.innerHTML = `<i class="fa ${card}"></i>` 
+        newCard.innerHTML = `<i class="fas ${card}"></i>` 
         fragment.appendChild(newCard); 
     }); 
     const deckCards = document.querySelector('.deck');  
@@ -105,7 +105,7 @@ function gameOver() {
 
 function movesCounter() {
     moves++; 
-    movesNumber.innerHTML = moves; 
+    movesNumber.textContent = moves; 
     starRating()
     // start timer on first move
     if(moves === 1) {
@@ -158,7 +158,7 @@ function startTimer(){
             hour++;
             minute = 0;
         }
-    },1000);
+    }, 1000);
 }
 
 function stopTimer() {
@@ -217,3 +217,13 @@ function closeModal() {
 }
 
 /************************************************************************/
+
+/*
+TODO:
+
+- Fix the timer to start at first card: 
+
+Instead of starting the timer after the first move where two cards are flipped over, it is supposed to start at the beginning of the game which would be at the latest when the first card is flipped over. The other option would be to start the timer when the page loads. It's not a requirement to change this - the relevant rubric already passed.
+
+**/
+
