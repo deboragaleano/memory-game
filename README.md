@@ -48,6 +48,7 @@ To preview the `index.html` (using the GitHub & BitBucket HTML Preview) please c
 * Shuffle function: [Stack Overflow](http://stackoverflow.com/a/2450976). 
 * Knowledge Udacity / Student's forum: For their assistance with creating the deck and the timer/reset function 
 * Udacity [Webinar](https://www.youtube.com/watch?time_continue=935&v=x47oLiTpIVk): For the game logic reference
+* Richard Codes: for the [modal popup](https://www.youtube.com/watch?v=gLWIYk0Sd38) reference. 
 
 ## Contributing
 
